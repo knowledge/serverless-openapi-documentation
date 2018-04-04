@@ -1,0 +1,64 @@
+{
+  "name": "serverless-openapi-documentation",
+  "version": "0.4.0",
+  "description": "Serverless 1.0 plugin to generate OpenAPI V3 documentation from serverless configuration",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/temando/serverless-openapi-documentation.git"
+  },
+  "bugs": "https://github.com/temando/serverless-openapi-documentation/issues",
+  "author": "Abilio Henrique <abilio.henrique@temando.com>",
+  "contributors": [
+    "Abilio Henrique <abilio.henrique@temando.com>",
+    "nfour <novus.nfour@gmail.com>"
+  ],
+  "keywords": [
+    "OpenAPI",
+    "swagger",
+    "serverless"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "test": "jest",
+    "test:build": "jest -c '{}' build",
+    "test:coverage": "jest --coverage",
+    "lint": "tslint -p tsconfig.json --type-check -c tslint.json",
+    "preversion": "yarn lint && yarn build && yarn test:build && changelog-verify CHANGELOG.md",
+    "version": "version-changelog CHANGELOG.md && changelog-verify CHANGELOG.md && git add CHANGELOG.md",
+    "release": "cd build && npm publish",
+    "test:project": "cd test/project && yarn sls openapi generate",
+    "test:prepare": "scripts/prepareTests.bash",
+    "build:link": "yarn build && cd build && yarn link",
+    "build:watch": "yarn build && tsc --watch",
+    "build": "scripts/build.bash"
+  },
+  "devDependencies": {
+    "@types/bluebird": "^3.5.8",
+    "@types/chalk": "^0.4.31",
+    "@types/fs-extra": "^4.0.0",
+    "@types/jest": "^20.0.2",
+    "@types/js-yaml": "^3.5.31",
+    "@types/node": "^8.0.7",
+    "@types/uuid": "^3.0.0",
+    "changelog-verify": "^1.0.4",
+    "jest": "^20.0.4",
+    "serverless": "^1.16.1",
+    "ts-jest": "^20.0.6",
+    "ts-node": "^3.1.0",
+    "tslint": "^5.4.3",
+    "tslint-config-temando": "^1.1.4",
+    "typescript": "^2.4.1",
+    "version-changelog": "^2.1.0"
+  },
+  "dependencies": {
+    "@jdw/jst": "^2.0.0-beta.9",
+    "bluebird": "^3.5.0",
+    "chalk": "^2.0.1",
+    "fs-extra": "^4.0.1",
+    "js-yaml": "^3.8.4",
+    "lutils": "^2.4.0",
+    "swagger2openapi": "^2.5.0",
+    "uuid": "^3.1.0"
+  }
+}
